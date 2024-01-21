@@ -46,7 +46,34 @@ Steps are happening in the sequence. It could be a job, a linux command, a servi
 
 ![image](https://github.com/zkrguan/Everything_About_Test/assets/97544709/a4f6c2b6-6a46-4d26-acc6-4bead66d0ac3)
 
+```yaml
+
+on:
+  pull_request:
+    branches:
+      - main
+      - 'mona/octocat'
+      - 'releases/**'
+```
+
+or 
+
+```yaml
+
+job3:
+  needs: [job1, job2]
+
+```
+
+Just remember, anything valid in JSON expression will be valid in YAML. 
+
 ## YAML 
+
+A YAML is just a super set of JSON. JSON is all about key value pairs. 
+
+Each identation is 2 spaces.
+
+If you have an array of elements, you could either use Json expression way or - - - way. 
 
 A typical YAML file looks like this:
 
@@ -81,7 +108,7 @@ Another more complicated job:
 
 ![image](https://github.com/zkrguan/Everything_About_Test/assets/97544709/3e101a64-8484-4e33-b83a-641d467e5dd2)
 
-What is this? There is no on. Wait for it. 
+
 
 ### runs-on: specify the OS you would like to run this. 
 
@@ -99,9 +126,48 @@ When you need to run multiple lines of commands, you need pipe.
 
 ## Unit Testing:
 
-What does the Unit mean? 
+### What does the Unit mean? 
 
 It could be functions, modules, and classes. 
 
-It should be covering all the coder paths, so it does not 
+It should be covering all the coder paths. Not just the normal flow but also the exception flow. 
+
+### Rules and highlights
+
+The tests are independent: No dependency between tests. Order of the tests should not matter. 
+
+Each test focuses on one thing: Avoid large tests. Instead, using more specific and smaller tests. (Save resources)
+
+Assert Correctness: Actual results are compared to expected values. Hardcoding expected outcome is allowed. 
+
+Tests are the documentations: Contract about what units of code should do. Specify our intentions. Some projects have no docs, and the tests are used for that purpose. 
+
+Tests should aid implementation: TDD (Test Driven Development) is also a trend now: think through inputs, outputs, edge cases. Parallelization: One person writes tests another the implementation. Aid Refactoring, Maintenance. (Think about the Old days when we were developing consoles, people actually tries put 0 to remove the line items. We never had that logic to handle.)
+
+Keep in mind that NOT EVERYTHING CAN BE TESTED IN THE UNIT TEST WAY. 
+
+Tests are also codes that must be maintained. Every line of code will potentially generate 3-5 lines. 
+
+Tests should cover 80%-100% of the codes. You don't have to cover everything, but you must keep the testing on a level. 
+
+Example of the coverage information. 
+
+![image](https://github.com/zkrguan/Everything_About_Test/assets/97544709/f2e7d0d5-c574-487a-b975-753766f120b5)
+
+### npm ci
+
+this is commonly used for testing. npm ci will only use the packagelock.json file. So it will only install the exact version you installed. 
+
+the combo is commonly used is 
+
+```md
+
+npm install-ci-test
+
+```
+
+
+## JEST, Supertest:
+
+Will update more with example codes.
 
